@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<form action='/'>
+			<input type="text" id="note-title" placeholder="Note Title" />
+			<textarea
+				id="note-body"
+				cols="30"
+				rows="10"
+				placeholder="Enter Note Text"
+			></textarea>
+			<button id="remove-note">Remove Note</button>
+			<button id="save-note">Save Note</button>
+		</form>
+
+		<script src="notes-functions.js"></script>
+		<script src="notes-edit.js"></script>
+	</body>
+</html>
