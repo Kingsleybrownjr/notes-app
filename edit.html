@@ -4,28 +4,53 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles/styles.css" />
 		<title>Document</title>
 	</head>
 	<body>
-		<form action="/">
-			<input type="text" id="note-title" placeholder="Note Title" />
-			<span id="last-edited"></span>
-			<textarea
-				id="note-body"
-				cols="30"
-				rows="10"
-				placeholder="Enter Note Text"
-			></textarea>
-			<button id="remove-note">Remove Note</button>
-			<button id="save-note">Save Note</button>
-		</form>
+		<header class="header">
+			<div class="container">
+				<h1 class="header__title">Notes App</h1>
+				<h2 class="header__subtitle">Take notes and never forget</h2>
+			</div>
+		</header>
+		<div class="actions">
+			<div class="actions__container actions__container--spaced">
+				<a href="/index.html">Home</a>
+				<span id="last-edited"></span>
+			</div>
+		</div>
+		<div class="container">
+			<form action="/">
+				<input
+					type="text"
+					class="title-input"
+					id="note-title"
+					placeholder="Note Title"
+				/>
+				<textarea
+					class="body-input"
+					id="note-body"
+					cols="30"
+					rows="10"
+					placeholder="Enter Note Text"
+				></textarea>
+				<div class='button--container'>
+					<button class="button button--secondary" id="remove-note">
+						Remove Note
+					</button>
+					<button class="button" id="save-note">Save Note</button>
+				</div>
+			</form>
+		</div>
+
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
 			integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		></script>
-		<script src="notes-functions.js"></script>
-		<script src="notes-edit.js"></script>
+		<script src="./scripts/notes-functions.js"></script>
+		<script src="./scripts/notes-edit.js"></script>
 	</body>
 </html>

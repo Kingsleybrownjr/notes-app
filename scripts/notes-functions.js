@@ -68,17 +68,26 @@ const sortTheNotesBy = (sortBy, a, b) => {
 
 // Render application notes
 const renderNotes = (notes, filters) => {
+	const notesEl = document.querySelector("#notes");
+
 	notes = sortNotes(notes, filters.sortBy);
 	const filteredNotes = notes.filter(note =>
 		note.title.toLowerCase().includes(filters.searchText.toLowerCase())
 	);
 
-	document.querySelector("#notes").innerHTML = "";
+	notesEl.innerHTML = "";
 
-	filteredNotes.forEach(note => {
-		const noteEl = generateNoteDOM(note);
-		document.querySelector("#notes").appendChild(noteEl);
-	});
+	if (filteredNotes.length < 1) {
+		const emptyMessage = document.createElement("p");
+		emptyMessage.textContent = "No Notes To Show";
+		emptyMessage.classList.add('empty-message')
+		notesEl.appendChild(emptyMessage);
+	} else {
+		filteredNotes.forEach(note => {
+			const noteEl = generateNoteDOM(note);
+			notesEl.appendChild(noteEl);
+		});
+	}
 };
 
 // Generate the last edited message
