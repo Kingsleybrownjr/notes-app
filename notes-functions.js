@@ -49,6 +49,10 @@ const generateNoteDOM = note => {
 	return noteEl;
 };
 
+const sortNotes = (notes, sortBy) =>
+	notes.sort((a, b) => sortTheNotesBy(sortBy, a, b));
+
+// sort your notes by one of three ways
 const sortTheNotesBy = (sortBy, a, b) => {
 	switch (sortBy) {
 		case "byEdited":
@@ -80,11 +84,6 @@ const sortTheNotesBy = (sortBy, a, b) => {
 		default:
 			return notes;
 	}
-};
-
-// sort your notes by one of three ways
-const sortNotes = (notes, sortBy) => {
-	return notes.sort((a, b) => sortTheNotesBy(sortBy, a, b));
 };
 
 // Render application notes
