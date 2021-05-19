@@ -28,7 +28,8 @@ document.querySelector("#search-text").addEventListener("input", e => {
 });
 
 document.querySelector("#filter-by").addEventListener("change", e => {
-	console.log(e.target.value);
+	filters.sortBy = e.target.value;
+	renderNotes(notes, filters);
 });
 
 window.addEventListener("storage", e => {
