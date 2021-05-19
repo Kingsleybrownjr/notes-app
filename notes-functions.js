@@ -7,15 +7,11 @@ const getSavedNotes = () => {
 };
 
 // Save the notes to localStorage
-const saveNotes = notes => {
-	localStorage.setItem("notes", JSON.stringify(notes));
-};
+const saveNotes = notes => localStorage.setItem("notes", JSON.stringify(notes));
 
 // Remove a note from the list
 const removeNote = id => {
-	const noteIndex = notes.findIndex(note => {
-		return note.id === id;
-	});
+	const noteIndex = notes.findIndex(note => note.id === id);
 
 	if (noteIndex > -1) {
 		notes.splice(noteIndex, 1);
@@ -38,11 +34,10 @@ const generateNoteDOM = note => {
 	});
 
 	// Setup the note title text
-	if (note.title.length > 0) {
-		textEl.textContent = note.title;
-	} else {
-		textEl.textContent = "Unnamed note";
-	}
+	note.title.length > 0
+		? (textEl.textContent = note.title)
+		: (textEl.textContent = "Unnamed note");
+
 	textEl.setAttribute("href", `/edit.html#${note.id}`);
 	noteEl.appendChild(textEl);
 
@@ -56,31 +51,13 @@ const sortNotes = (notes, sortBy) =>
 const sortTheNotesBy = (sortBy, a, b) => {
 	switch (sortBy) {
 		case "byEdited":
-			if (a.updatedAt > b.updatedAt) {
-				return -1;
-			} else if (a.updatedAt < b.updatedAt) {
-				return 1;
-			} else {
-				return 0;
-			}
+			return a.updatedAt > b.updatedAt ? -1 : 1;
 
 		case "byCreated":
-			if (a.createdAt > b.createdAt) {
-				return -1;
-			} else if (a.createdAt < b.createdAt) {
-				return 1;
-			} else {
-				return 0;
-			}
-		case "alphabetical":
-			if (a.title.toLowerCase() < b.title.toLowerCase()) {
-				return -1;
-			} else if (a.title.toLowerCase() > b.title.toLowerCase()) {
-				return 1;
-			} else {
-				return 0;
-			}
+			return a.createdAt > b.createdAt ? -1 : 1;
 
+		case "alphabetical":
+			return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
 		default:
 			return notes;
 	}
