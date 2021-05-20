@@ -1,55 +1,36 @@
+import { updateNote, removeNote } from "./notes";
+import { renderEditPage, generateLastEdited } from "./views";
+
 const titleElement = document.querySelector("#note-title");
 const bodyElement = document.querySelector("#note-body");
+const dateElement = document.querySelector("#last-edited");
 const saveNoteBtn = document.querySelector("#save-note");
 const removeBtn = document.querySelector("#remove-note");
-const dateElement = document.querySelector("#last-edited");
 
 const noteId = location.hash.substring(1);
-let notes = getSavedNotes();
 
-let note = notes.find(note => note.id === noteId);
-
-if (note === undefined) {
-	location.assign("/index.html");
-}
-
-titleElement.value = note.title;
-bodyElement.value = note.body;
-dateElement.textContent = generateLastEdited(note.updatedAt);
+renderEditPage(noteId);
 
 titleElement.addEventListener("input", e => {
-	note.title = e.target.value;
-	note.updatedAt = moment().valueOf();
+	const note = updateNote(noteId, {
+		title: e.target.value,
+	});
 	dateElement.textContent = generateLastEdited(note.updatedAt);
-	saveNotes(notes);
 });
 
 bodyElement.addEventListener("input", e => {
-	note.body = e.target.value;
-	note.updatedAt = moment().valueOf();
+	const note = updateNote(noteId, {
+		body: e.target.value,
+	});
 	dateElement.textContent = generateLastEdited(note.updatedAt);
-	saveNotes(notes);
 });
 
-saveNoteBtn.addEventListener("click", e => saveNotes(notes));
+saveNoteBtn.addEventListener("click", e => saveNotes());
 
-removeBtn.addEventListener("click", e => {
-	removeNote(note.id);
-	saveNotes(notes);
-});
+removeBtn.addEventListener("click", e => removeNote(noteId));
 
 window.addEventListener("storage", e => {
 	if (e.key === "notes") {
-		notes = JSON.parse(e.newValue);
-
-		note = notes.find(note => note.id === noteId);
-
-		if (note === undefined) {
-			location.assign("/index.html");
-		}
-
-		titleElement.value = note.title;
-		bodyElement.value = note.body;
-		dateElement.textContent = generateLastEdited(note.updatedAt);
+		renderEditPage(noteId);
 	}
 });

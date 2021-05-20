@@ -5,7 +5,7 @@ const filters = {
 
 const getFilters = () => filters;
 
-const setFilters = () => {
+const setFilters = updates => {
 	if (typeof updates.searchText === "string") {
 		filters.searchText = updates.searchText;
 	}

@@ -1,4 +1,4 @@
-import uuidv4 from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
 let notes = [];
@@ -21,6 +21,7 @@ const saveNotes = () => localStorage.setItem("notes", JSON.stringify(notes));
 notes = loadNotes();
 const getNotes = () => notes;
 
+// create note
 const createNote = () => {
 	const noteId = uuidv4();
 	const timestamp = moment().valueOf();
@@ -33,6 +34,8 @@ const createNote = () => {
 		updatedAt: timestamp,
 	});
 	saveNotes();
+
+	return noteId;
 };
 
 // Remove a note from the list
@@ -79,6 +82,7 @@ const updateNote = (id, updates) => {
 	}
 
 	saveNotes();
+	return note;
 };
 
-export { getNotes, createNote, removeNote, sortNotes, updateNote };
+export { getNotes, createNote, removeNote, sortNotes, updateNote, saveNotes };
