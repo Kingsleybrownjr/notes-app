@@ -1,25 +1,4 @@
-// Read existing notes from localStorage
-const getSavedNotes = () => {
-	const notesJSON = localStorage.getItem("notes");
-
-	try {
-		return notesJSON ? JSON.parse(notesJSON) : [];
-	} catch (e) {
-		return [];
-	}
-};
-
-// Save the notes to localStorage
-const saveNotes = notes => localStorage.setItem("notes", JSON.stringify(notes));
-
-// Remove a note from the list
-const removeNote = id => {
-	const noteIndex = notes.findIndex(note => note.id === id);
-
-	if (noteIndex > -1) {
-		notes.splice(noteIndex, 1);
-	}
-};
+import moment from "moment";
 
 // Generate the DOM structure for a note
 const generateNoteDOM = note => {
@@ -46,25 +25,6 @@ const generateNoteDOM = note => {
 	noteEl.appendChild(statusEl);
 
 	return noteEl;
-};
-
-const sortNotes = (notes, sortBy) =>
-	notes.sort((a, b) => sortTheNotesBy(sortBy, a, b));
-
-// sort your notes by one of three ways
-const sortTheNotesBy = (sortBy, a, b) => {
-	switch (sortBy) {
-		case "byEdited":
-			return a.updatedAt > b.updatedAt ? -1 : 1;
-
-		case "byCreated":
-			return a.createdAt > b.createdAt ? -1 : 1;
-
-		case "alphabetical":
-			return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
-		default:
-			return notes;
-	}
 };
 
 // Render application notes
@@ -94,3 +54,5 @@ const renderNotes = (notes, filters) => {
 // Generate the last edited message
 const generateLastEdited = timestamp =>
 	`Last edited ${moment(timestamp).fromNow()}`;
+
+export { generateNoteDOM, renderNotes, generateLastEdited };

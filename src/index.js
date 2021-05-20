@@ -1,4 +1,9 @@
-let notes = getSavedNotes();
+import { createNote, getNotes, removeNote } from "./notes";
+import { getFilters, setFilters } from "./filters";
+
+
+
+let notes = getNotes;
 
 const filters = {
 	searchText: "",
@@ -8,16 +13,7 @@ const filters = {
 renderNotes(notes, filters);
 
 document.querySelector("#create-note").addEventListener("click", e => {
-	const noteId = uuidv4();
-	const timestamp = moment().valueOf();
-
-	notes.push({
-		id: noteId,
-		title: "",
-		body: "",
-		createdAt: timestamp,
-		updatedAt: timestamp,
-	});
+	createNote();
 	saveNotes(notes);
 	location.assign(`/edit.html#${noteId}`);
 });
